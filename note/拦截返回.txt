@@ -1,0 +1,9 @@
+拦截返回异常：
+1、自定义一个类：CustomExtHandler
+    加注解：@RestControllerAdvice 表示拦截全部请求的返回（如果是@ControllerAdvice，那样的话就要加@ResponseBody了）
+2、那个方法加 @ExceptionHandler(value=Exception.class)
+    你也可以自定义异常 .class 嘛。
+3、像这个类，定义了两个异常，一定会走小异常的：handleMyException，具体你懂的。
+
+对返回的json进行拦截并处理：
+https://blog.csdn.net/syystx/article/details/82870217

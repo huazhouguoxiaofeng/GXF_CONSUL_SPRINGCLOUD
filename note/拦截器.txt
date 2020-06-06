@@ -1,0 +1,6 @@
+1、定义一个类，这个类是添加什么拦截器啊什么器都放在里面：com.gxf.user.controller.MyWebAppConfigurer
+    这个类里面具体有什么东东，可以看这个类嘛
+    -》addPathPatterns//这个是添加拦截路径，excludePathPatterns这个是排除拦截的路径多个路径中间用逗号隔开，
+2、然后就是具体定义这个类是干嘛的了嘛，注意这个类一定要重写HandlerInterceptor类
+    com.gxf.user.interceptor.InterceptorConfig
+3、然后请求一个方法的时候，就自动  preHandle  或 postHandle  或  afterCompletion 了

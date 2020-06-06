@@ -1,5 +1,8 @@
 package com.gxf.user.bean.handler;
 
+/**
+ *
+ */
 public class RtnMsg{
 
     private String rtnCode;

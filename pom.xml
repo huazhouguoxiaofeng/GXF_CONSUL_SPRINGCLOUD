@@ -98,6 +98,7 @@
         </dependencies>
     </dependencyManagement>
 
+    <!-- 有了这个东东之后，就会指定main方法执行，在linux环境就可以用java -jar 打包了 -->
     <build>
         <plugins>
             <plugin>

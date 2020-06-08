@@ -1,0 +1,2 @@
+1、注意所访问的初始路径一定都是在：static目录下面
+2、com.gxf.user.controller.FileController  留意这个方法的强大之处，但是为什么强大呢，这个问题要思考思考

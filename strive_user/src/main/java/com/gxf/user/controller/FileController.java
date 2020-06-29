@@ -1,13 +1,6 @@
 package com.gxf.user.controller;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.UUID;
-
-import javax.servlet.http.HttpServletRequest;
-
-
-import com.gxf.common.entity.JsonData;
+import com.gxf.common.entity.MsgResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
@@ -15,6 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
+import java.util.UUID;
 
 /**
  * 功能描述：文件测试
@@ -31,7 +29,7 @@ public class FileController {
 
 	@RequestMapping(value = "upload")
 	@ResponseBody
-	public JsonData upload(@RequestParam("head_img") MultipartFile file, HttpServletRequest request) {
+	public MsgResponse upload(@RequestParam("head_img") MultipartFile file, HttpServletRequest request) {
 
 		//file.isEmpty(); 判断图片是否为空
 		//file.getSize(); 图片大小进行判断
@@ -58,14 +56,15 @@ public class FileController {
 
 		try {
 			file.transferTo(dest);
-
-			return new JsonData(0, fileName);
+			return null;
+//			return new MsgResponse(HttpStatus.OK.value(), fileName);
 		} catch (IllegalStateException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return  new JsonData(-1, "fail to save ", null);
+		return null;
+//		return  new MsgResponse(-1, "fail to save ", null);
 	}
 
 }

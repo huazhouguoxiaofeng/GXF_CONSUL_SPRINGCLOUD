@@ -2,15 +2,14 @@ package com.gxf.user.controller;
 
 import com.gxf.common.entity.TestEntity;
 import com.gxf.common.entity.UserEntity;
+import com.gxf.user.back.handler.MyException;
 import com.gxf.user.configuration.GuoXiaoProperties;
-import com.gxf.user.excepion.MyException;
 import com.gxf.user.service.UserService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
@@ -37,6 +36,7 @@ public class UserController {
         UserEntity userEntity = userService.getUserById(id);
 //        return "SUCCESS: " + serverPort + ": id" + id;
         log.info(" \n guoXiaoProperties的属性为：{}", guoXiaoProperties.toString());
+        System.out.println("userEntity: " + userEntity);
         return userEntity;
     }
 
@@ -58,7 +58,7 @@ public class UserController {
         return testEntity;
     }
 
-    @GetMapping("test-exception")
+    @GetMapping("/test-exception")
     public String testException(int digit){
 
         switch (digit){

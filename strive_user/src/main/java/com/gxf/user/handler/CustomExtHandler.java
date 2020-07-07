@@ -1,4 +1,4 @@
-package com.gxf.user.back.handler;
+package com.gxf.user.handler;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -33,8 +33,8 @@ public class CustomExtHandler {
 	 * 功能描述：处理自定义异常
 	 * @return
 	 */
-	@ExceptionHandler(value=MyException.class)
-	Object handleMyException(MyException e,HttpServletRequest request){
+	@ExceptionHandler(value= MyException.class)
+	Object handleMyException(MyException e, HttpServletRequest request){
 
 //		返回json数据，由前端去判断加载什么页面
 		Map<String, Object> map = new HashMap<>();

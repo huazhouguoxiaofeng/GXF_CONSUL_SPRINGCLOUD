@@ -2,11 +2,13 @@ package com.gxf.user.controller;
 
 import com.gxf.common.entity.TestEntity;
 import com.gxf.common.entity.UserEntity;
-import com.gxf.user.back.handler.MyException;
 import com.gxf.user.configuration.GuoXiaoProperties;
+import com.gxf.user.handler.MyException;
+import com.gxf.user.handler.Unpackaged;
 import com.gxf.user.service.UserService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -77,5 +79,20 @@ public class UserController {
         }
 
     }
+
+    @GetMapping("/test-pack")
+    public Cao testPack(){
+        Cao cao = new Cao();
+        cao.setName("caoname");
+        return cao;
+    }
+
+
+}
+
+@Data
+class Cao implements Unpackaged {
+
+    private String name;
 
 }

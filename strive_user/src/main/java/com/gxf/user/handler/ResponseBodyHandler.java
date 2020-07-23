@@ -13,6 +13,8 @@ import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
+// https://www.jianshu.com/p/5c53b8b14e8d
+
 @RestControllerAdvice
 @Slf4j
 public class ResponseBodyHandler implements ResponseBodyAdvice<Object> {

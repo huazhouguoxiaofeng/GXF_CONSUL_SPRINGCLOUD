@@ -19,6 +19,9 @@ spring:
     url: jdbc:mysql://localhost:3306/gxf_database?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC&useSSL=false
     username: root
     password: 123456
+  redis:
+    cluster:
+      nodes: 192.168.207.130:6380,192.168.207.130:6381,192.168.207.130:6382,192.168.207.130:6383,192.168.207.130:6384,192.168.207.130:6385
 
 ###mybatis-plus配置
 mybatis-plus:

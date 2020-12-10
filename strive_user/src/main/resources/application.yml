@@ -38,5 +38,8 @@ mybatis-plus:
 xixi:
   haha: "10010"
 
+test:
+  conditional.on.property: wocao
+
 
 

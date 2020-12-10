@@ -3,6 +3,7 @@ package com.gxf.user.configuration;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,6 +21,10 @@ import org.springframework.context.annotation.PropertySource;
  * @Value("${xixi.haha:10086}")
  *    1、还有这个注解，就是最简单的从配置文件里面读取属性值了
  *    2、如果配置文件里面没有，就是这个默认值了，也就是说配置文件里面没有也不会报错的
+ * @ConditionalOnProperty   通过这个注解来控制 @Configuration 是否生效
+ *      从配置文件中取值（test.conditional.on.property）得到 wocao，wocao 再跟 havingValue 比较，
+ *      这里一样，所以返回 true，所以 @Configuration 就生效，如果不一样，返回false，@Configuration 就不生效了
+ *      matchIfMissing：缺少该property时是否可以加载。如果为true，没有该property也会正常加载；反之报错
  */
 @Configuration
 @Data
@@ -28,6 +33,7 @@ import org.springframework.context.annotation.PropertySource;
 @NoArgsConstructor
 //@Component
 @PropertySource("classpath:gxf.properties")
+@ConditionalOnProperty(value = "conditional.on.property",prefix = "test",havingValue = "wocao")
 public class GuoXiaoProperties {
     private String feng;
     private String hui;

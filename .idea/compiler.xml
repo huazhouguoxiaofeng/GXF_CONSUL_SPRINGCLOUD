@@ -8,9 +8,9 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="strive_common" />
+        <module name="strive_user" />
         <module name="strive_order" />
         <module name="strive_product" />
-        <module name="strive_user" />
       </profile>
     </annotationProcessing>
   </component>

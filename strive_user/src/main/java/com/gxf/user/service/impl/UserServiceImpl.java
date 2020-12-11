@@ -27,7 +27,8 @@ public class UserServiceImpl implements UserService {
 //        UserEntity user3 = userMapper.selectOne(qw.eq("id", id));
 
         // 完全自定义
-//        UserEntity user4 = userMapper.findById(id);
+        String asdfadf = userMapper.findById(String.valueOf(id));
+        System.out.println(asdfadf);
 
 		/*
 		使用 Wrapper 自定义SQL

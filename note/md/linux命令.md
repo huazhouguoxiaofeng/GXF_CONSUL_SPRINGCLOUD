@@ -476,7 +476,7 @@ root       2310   2245  0 10:29 pts/0    00:00:00 grep httpd
 
 ## ps
 
-功能说明：显示所有进程信息。 ps 与grep 常用组合用法，查找特定进程
+process status 的缩写
 
 ```shell
 ## 打印当前所有进程
@@ -484,8 +484,8 @@ ps -ef
 ## 举 例：
 ps -ef | grep nginx 
 ps -aux | grep nginx 
-ps -aux | more 
-ps -ef | more
+ps -aux | more  ## 这样的话，就连接起来分页查看了嘛
+ps -ef | more ## 这样的话，就连接起来分页查看了嘛
 ```
 
 ## free;top;df;du

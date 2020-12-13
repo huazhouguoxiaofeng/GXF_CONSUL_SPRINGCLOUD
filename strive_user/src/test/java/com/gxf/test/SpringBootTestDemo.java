@@ -10,7 +10,9 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.Period;
 
 
 @RunWith(SpringRunner.class)  //底层用junit  SpringJUnit4ClassRunner
@@ -28,9 +30,8 @@ public class SpringBootTestDemo {
 	
 	@Test
 	public void testTwo(){
-		System.out.println("test hello 2");
-		TestCase.assertEquals(1, 1);
-		
+		Duration between = Duration.between(LocalDate.parse("2020-09-04"), LocalDate.parse("2017-09-18"));
+		System.out.println(between.toDays());
 	}
 	
 	

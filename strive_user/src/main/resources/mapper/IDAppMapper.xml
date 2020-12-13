@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxf.user.mapper.UserMapper">
+
+<!--	<resultMap type="cn.richinfo.mapper.bean.IDAppBean" id="IDAppBeanResult">-->
+<!--		<result property="corpId"      column="corpId"         />-->
+<!--		<result property="appId"        column="app_Id"            />-->
+<!--		<result property="app_business"        column="app_business"            />-->
+<!--		<result property="app_key" column="app_key"    />-->
+<!--		<result property="app_public_key"       column="app_public_key"           />-->
+<!--		<result property="app_platfrom"            column="app_platform"                />-->
+<!--		<result property="app_serverIp"           column="app_serverIp"               />-->
+<!--		<result property="app_creattime"     column="app_createtime"        />-->
+<!--		<result property="app_capacity"     column="app_capacity"        />-->
+<!--		<result property="app_capacity_state"     column="app_capacity_state"        />-->
+<!--		<result property="app_state"     column="app_state"        />-->
+<!--		<result property="app_extend"     column="app_extend"        />-->
+<!--		<result property="app_setchain_price"     column="app_setchain_price"        />-->
+<!--		<result property="app_querychain_price"     column="app_querychain_price"        />-->
+<!--	</resultMap>-->
+
+	<select id="findById" parameterType="java.lang.String" resultType="java.lang.String">
+		select t.name from user t where t.id = #{appId}
+	</select>
+
+	<!--<select id="selectLogininforList" parameterType="SysLogininfor" resultMap="SysLogininforResult">-->
+		<!--select info_id, user_name, ipaddr, login_location, browser, os, status, msg, login_time from sys_logininfor-->
+		<!--<where>-->
+			<!--<if test="ipaddr != null and ipaddr != ''">-->
+				<!--AND ipaddr like concat('%', #{ipaddr}, '%')-->
+			<!--</if>-->
+			<!--<if test="status != null and status != ''">-->
+				<!--AND status = #{status}-->
+			<!--</if>-->
+			<!--<if test="userName != null and userName != ''">-->
+				<!--AND user_name like concat('%', #{userName}, '%')-->
+			<!--</if>-->
+			<!--<if test="beginTime != null and beginTime != ''">&lt;!&ndash; 开始时间检索 &ndash;&gt;-->
+				<!--and date_format(login_time,'%y%m%d') &gt;= date_format(#{beginTime},'%y%m%d')-->
+			<!--</if>-->
+			<!--<if test="endTime != null and endTime != ''">&lt;!&ndash; 结束时间检索 &ndash;&gt;-->
+				<!--and date_format(login_time,'%y%m%d') &lt;= date_format(#{endTime},'%y%m%d')-->
+			<!--</if>-->
+		<!--</where>-->
+		<!--order by info_id desc-->
+	<!--</select>-->
+	<!---->
+	<!--<delete id="deleteLogininforByIds" parameterType="Long">-->
+ 		<!--delete from sys_logininfor where info_id in-->
+ 		<!--<foreach collection="array" item="infoId" open="(" separator="," close=")">-->
+ 			<!--#{infoId}-->
+        <!--</foreach> -->
+ 	<!--</delete>-->
+    <!---->
+    
+</mapper> 

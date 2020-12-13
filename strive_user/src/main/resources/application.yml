@@ -26,6 +26,7 @@ spring:
 ###mybatis-plus配置
 mybatis-plus:
   global-config:
+    mapper-locations: classpath:/mapper/*.xml
     db-config:
       #逻辑删除配置
       logic-delete-value: 1 # 逻辑已删除值(默认为 1)

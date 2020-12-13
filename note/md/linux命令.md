@@ -148,11 +148,7 @@ rm -rf *.xml *.txt  ## 删除所有后缀名为xml以及txt 的文件
 ###  vi
 
 ```shell
-1) 首先会进入“一般模式”，此模式只接受各种命令快捷键，不能编辑文件内容
-2) 按 i 键，就会从一般模式进入“编辑模式”，此模式下，敲入的都是文件内容(按 i 键留在光标当前处，o 键另起一行)
-3) 编辑完成之后，按Esc键退出编辑模式，回到一般模式；
-4) 再按：（冒号），进入“底行模式”
-“命令模式”：
+1)首先进入 “一般模式”：
 gg   直接跳到文件的首行
 G    直接跳到文件的末行
 dd    删除一行
@@ -160,7 +156,8 @@ yy    复制一行
 p     粘贴
 u     撤销
 $     移动到这一行的行尾
-“底行模式”：
+2) 按 i 键，就会从一般模式进入“编辑模式”
+3) “编辑模式” 按 esc 再按：（冒号）进入 “底行模式”：
 n #n为数字。光标移动到第n 行
 / #寻找内容
 %s/word1/word2/g #从第一行到最后一行寻找 word1 字符串，并将该字符串取代为 word2
@@ -681,7 +678,7 @@ systemctl start/stop/status firewalld
 service --status-all   # 查看系统所有的后台服务进程
 service --status-all | grep httpd  # 指定
 
-配置后台服务进程的开机自启：
+## 配置后台服务进程的开机自启：
 chkconfig httpd on  ## 让httpd服务开机自启（所有系统的启动级别）
 chkconfig httpd off  ## 让httpd服务开机不要自启（所有系统的启动级别）
 chkconfig --level 35 httpd on ## 指定在系统的启动级别为3和5的情况下，httpd服务自启
@@ -751,7 +748,7 @@ root       2310   2245  0 10:29 pts/0    00:00:00 grep httpd
 
 ###  ps
 
-功能说明：显示所有进程信息。 ps 与grep 常用组合用法，查找特定进程
+process status 的缩写
 
 ```shell
 ## 打印当前所有进程
@@ -759,8 +756,8 @@ ps -ef
 ## 举 例：
 ps -ef | grep nginx 
 ps -aux | grep nginx 
-ps -aux | more 
-ps -ef | more
+ps -aux | more  ## 这样的话，就连接起来分页查看了嘛
+ps -ef | more ## 这样的话，就连接起来分页查看了嘛
 ```
 
 + UID：用户ID

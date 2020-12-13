@@ -1,4 +1,4 @@
-## 衣捞甲杂修改测试
+###  衣捞甲杂修改测试
 
 ```shell
 注释：空格，再一个#或者两个井号##，再空格写注释
@@ -7,15 +7,15 @@ ctrl + l   ## 清屏好使好多
 lsb_release -a  ## 查看服务器信息
 ```
 
-## wget 
+###  wget 
 
 ```shell
 yum install wget
-## 例如：redis
+###  例如：redis
 wget http://download.redis.io/releases/redis-6.0.6.tar.gz
 ```
 
-## diff;man;pwd;--help;echo
+###  diff;man;pwd;--help;echo
 
 ```shell
 diff 123.txt 456.txt   # 差异
@@ -34,7 +34,7 @@ a
 29514
 ```
 
-## date;cal;日期校准
+###  date;cal;日期校准
 
 ```shell
 [root@mini1 ~]# date
@@ -55,7 +55,7 @@ yum install ntpdate
 ntpdate ntp1.aliyun.com
 ```
 
-## last
+###  last
 
 ```shell
 [root@mini1 ~]# last -3
@@ -73,7 +73,7 @@ root     pts/0        192.168.174.1    Sat Aug 18 00:51 - 01:02  (00:11)
 wtmp begins Sat Jul 14 21:42:45 2018
 ```
 
-## who;id;whoami 
+###  who;id;whoami 
 
 ```shell
 [xiaofeng01@mini1 ~]$ id
@@ -93,7 +93,7 @@ sz;rz
 用ZModem吧。安装：yum install lrzsz
 ```
 
-## cd;ls
+###  cd;ls
 
 ```shell
 cd ~      ## 切换到用户主目录
@@ -114,7 +114,7 @@ ls -lrt *pop3*
 ls -lrt | grep *pop3*
 ```
 
-## mkdir;rm
+###  mkdir;rm
 
 ```shell
 mkdir aaa    ## 这是相对路径的写法
@@ -127,20 +127,25 @@ rm -rf aaa bbb ccc ## 哈哈哈，同时删除aaa,bbb,ccc这些文件夹啊
 rm -rf *.xml *.txt  ## 删除所有后缀名为xml以及txt 的文件
 ```
 
-## touch;mv;cp;scp
+###  touch;mv;cp;scp
 
-```shell
-## 创建文件haha
-    touch haha
-## 将文件haha改名为xixi
-    mv haha xixi
-## 将文件xixi移动到当前目录下面的文件夹heihei内
-    mv xixi heihei
-## system copy，服务间文件拷贝，要输入用户名密码的登录：scp 【参数】【原路径以及文件】【目标路径】
-    scp -r /etc/hosts root@mini3:/etc/
-```
+ + 创建文件haha：touch haha
 
-## vi
+ + 将文件haha改名为xixi：mv haha xixi
+
+ + 将文件xixi移动到当前目录下面的文件夹heihei内：mv xixi heihei
+
+ + scp
+
+    + -r：递归的作用
+    + 可以从本服务传输到其它服务器，也可以从其它服务器传输到本服务器
+    + system copy，服务间文件拷贝，要输入用户名密码的登录：scp 【参数】【原路径以及文件】【目标路径】
+
+   ```shell
+   scp -r /etc/hosts root@mini3:/etc/
+   ```
+
+###  vi
 
 ```shell
 1) 首先会进入“一般模式”，此模式只接受各种命令快捷键，不能编辑文件内容
@@ -169,14 +174,14 @@ wq! #强制离开并保存
 !ls #暂时离开
 ```
 
-## wc 统计行
+###  wc 统计行
 
 ```shell
 [root@SYSOPS00074145 gxf]# wc -l 123.txt ## 说明123.txt这个文件里面有5行
 5 123.txt  
 ```
 
-## grep
+###  grep
 
 ```shell
 grep 'fffff' 123.txt   ## 筛选
@@ -189,7 +194,7 @@ grep -i 'fffff' 123.txt | wc -l ##管道
 ```
 
 
-## cat;more;less;tail;head 
+###  cat;more;less;tail;head 
 
 ```shell
 ## 一次性将文件内容全部输出（控制台）
@@ -215,7 +220,115 @@ tail -10f install.log  实时跟踪文件，开始时显示后10行
 ccc.txt
 ```
 
-## 重定向
+### cut
+
++ -d #指定分割符
+
++ -f #指定截取区域
+
++ -c #以字符为单位进行分割
+
+  注意：不加-d选项，默认为制表符，不是空格 
+
+```shell
+## 以':'为分隔符，截取出/etc/passwd的第一列跟第三列 
+cut -d ':' -f 1,3 /etc/passwd
+## 以':'为分隔符，截取出/etc/passwd的第一列到第三列 
+cut -d ':' -f 1-3 /etc/passwd
+## 以':'为分隔符，截取出/etc/passwd的第二列到最后一列 
+cut -d ':' -f 2- /etc/passwd
+## 截取/etc/passwd文件从第二个字符到第九个字符 
+cut -c 2-9 /etc/passwd
+## 比如领导想叫你截取linux上面所有可登陆普通用户,-v 表示取反，不加-v的话，就表示过滤出root用户了
+cat /etc/passwd | grep '/bin/bash' | cut -d ':' -f 1 | grep -v root
+```
+
+### awk
+
+***awk '条件1 {执行动作} 条件2 {执行动作} ...' 文件名***
+
+***awk [选项] '条件1 {执行动作} 条件2 {执行动作} ...' 文件名***
+
++ printf #格式化输出，不会自动换行
+
++ print #打印出内容，默认会自动换行
+
++ %s #代表字符串
+
++ \t #制表符
+
++ \n #换行符
+
++ NR #行号
+
++ $1 #代表第一列
+
++ $2 #代表第二列
+
++ $NF#代表最后一列
+
++ -F #指定分割符
+
+  ```shell
+  [root@mini1 aaa]# printf '%s\t%s\t\n' 1 2
+  1       2
+  ```
+
+  > 打印出第二列：df -h | awk '{print $2}'
+  >
+  > 打印出最后一列：df -h | awk '{print $NF}'
+  >
+  > 打印出第四行的第二列：df -h | awk 'NR==4 {print $2}'
+  >
+  > 打印出第二到第五行的第一列：df -h | awk '(NR>=2 && NR <=5) {print $1}' 
+  >
+  > 以:为文件分隔符，打印出第一行：cat /etc/passwd | awk '{FS=":"}{print $1}'、awk -F":" '{print $1}' /etc/passwd 
+
+  ```shell
+  [root@mini1 aaa]# df -h
+  Filesystem            Size  Used Avail Use% Mounted on
+  /dev/mapper/vg_mini1-lv_root
+                         18G  7.9G  8.5G  49% /
+  tmpfs                 1.5G   80K  1.5G   1% /dev/shm
+  /dev/sda1             477M   37M  415M   9% /boot
+  /dev/sr0              3.7G  3.7G     0 100% /media/CentOS_6.7_Final
+  [root@mini1 aaa]# df -h | awk '{printf $1} {printf "文件系统使用率："} {print $5}'                      
+  Filesystem文件系统使用率：Use%
+  /dev/mapper/vg_mini1-lv_root文件系统使用率：
+  18G文件系统使用率：/
+  tmpfs文件系统使用率：1%
+  /dev/sda1文件系统使用率：9%
+  /dev/sr0文件系统使用率：100%
+  [root@mini1 aaa]# df -h |grep -v 'Filesystem' | awk '{printf $1} {printf "文件系统使用率："} {print $5}'
+  /dev/mapper/vg_mini1-lv_root文件系统使用率：
+  18G文件系统使用率：/
+  tmpfs文件系统使用率：1%
+  /dev/sda1文件系统使用率：9%
+  /dev/sr0文件系统使用率：100%
+  [root@mini1 aaa]# df -h |grep -v 'Filesystem' | awk 'BEGIN {printf "文件系统使用情况：\n \n"} {printf $1} {printf "文 件 系统使用率："} {print $5}'
+  文件系统使用情况：
+   
+  /dev/mapper/vg_mini1-lv_root文 件系统使用率：
+  18G文 件系统使用率：/
+  tmpfs文 件系统使用率：1%
+  /dev/sda1文 件系统使用率：9%
+  /dev/sr0文 件系统使用率：100%
+  [root@mini1 aaa]# df -h |grep -v 'Filesystem' | awk 'BEGIN {printf "文件系统使用情况：\n \n"} {printf $1} {printf "文件系统使用率："} {print $5} END {printf "一切正常 \n"}'
+  文件系统使用情况：
+   
+  /dev/mapper/vg_mini1-lv_root文件系统使用率：
+  18G文件系统使用率：/
+  tmpfs文件系统使用率：1%
+  /dev/sda1文件系统使用率：9%
+  /dev/sr0文件系统使用率：100%
+  一切正常 
+  ```
+
+  
+
+
+
+###  重定向
 
 ```shell
 posix名称 文件描述符 用途
@@ -313,7 +426,7 @@ posix名称 文件描述符 用途
 	cat: asdf.txt: No such file or directory
 ```
 
-## 压缩/解压 
+###  压缩/解压 
 
 1）tar为打包；压缩的话只能压缩文件，不能压缩文件夹；只测试过前面两三个，后面的没有测试过，只是用来备份记录
 
@@ -373,7 +486,9 @@ posix名称 文件描述符 用途
 压缩：rar e FileName.rar
 ```
 
-## find
+### find
+
+-name 指查找文件名；-type 指要查找的文件类型；-perm  文件权限；-user 所属主
 
 ```shell
 find -name sfapp   当前目录下查询是否有sfapp这个文件或者文件夹
@@ -381,38 +496,179 @@ find / -name sfapp  根目录下查询
 find /home -name sfapp 指定目录下查找
 find /home -name sfa*  模糊查找
 find /home -name *fa* 模糊查找
-
+find /home -type d -name 111  ### d表示目录  
+find /home -type f -name 111  ### f表示文件
 查找可执行的命令所在的路径：which java
 查找可执行的命令和帮助的位置：whereis java
 显示历史命令：history
 histroy | grep srp   查看关于输过srp的历史命令
 ```
 
-## 权限
+### 软硬链接
 
-```shell
-d：标识节点类型（d：文件夹   -：文件  l:链接）
-r：可读   w：可写    x：可执行 
++ 为文件111（注意一定要是写绝对路径），在 ../bbb 这个路径下面创建一个软链接 222，就类似于桌面快捷方式，一旦源文件：/home/hahahome/aaa/111删掉，就会闪烁
+
+```sh
+ln -s  /home/hahahome/aaa/111 ../bbb/222  ## /home/hahahome/aaa
+222 -> /home/hahahome/aaa/111 ## ../bbb
+```
+
+ + 为文件111（注意一定要是写绝对路径），在 ../bbb 这个路径下面创建一个软链接 222，111 和 222 都是一个变量，他们的地位相等，都指向底层的一个对象，删除其中谁谁谁都没有关系。他们的Inode号一样。常用于防止重要文件被误删
+
+   ```shell
+   [root@mini1 aaa]# ln  /home/hahahome/aaa/111 ../bbb/222
+   [root@mini1 aaa]# stat 111
+     File: `111'
+     Size: 0               Blocks: 0          IO Block: 4096   regular empty file
+   Device: fd00h/64768d    Inode: 282021      Links: 2
+   Access: (0644/-rw-r--r--)  Uid: (    0/    root)   Gid: (    0/    root)
+   Access: 2020-11-19 02:16:20.108344869 +0800
+   Modify: 2020-11-19 02:16:20.108344869 +0800
+   Change: 2020-11-19 02:16:25.016344645 +0800
+   [root@mini1 aaa]# cd ../bbb
+   [root@mini1 bbb]# ll
+   total 0
+   -rw-r--r--. 2 root root 0 Nov 19 02:16 222
+   [root@mini1 bbb]# stat 222
+     File: `222'
+     Size: 0               Blocks: 0          IO Block: 4096   regular empty file
+   Device: fd00h/64768d    Inode: 282021      Links: 2
+   Access: (0644/-rw-r--r--)  Uid: (    0/    root)   Gid: (    0/    root)
+   Access: 2020-11-19 02:16:20.108344869 +0800
+   Modify: 2020-11-19 02:16:20.108344869 +0800
+   Change: 2020-11-19 02:16:25.016344645 +0800
+   [root@mini1 bbb]# ls -li
+total 0
+   282021 -rw-r--r--. 2 root root 0 Nov 19 02:16 222
+```
+   
+
+### 权限
+
+####  文件权限
+
+| d | rwxr-xr-x | 1    | root | root | 1595 | Nov 10  2018 | anaconda-ks.cfg |
+| ---------- | ---- | ---- | ---- | ---- | ------------ | --------------- | --------------- |
+|  |      | 上面有多少个硬链接 |      |      | 大小 | 时间 |文件名|
+
+\- #代表的是文件；d#代表是目录； l #软链接文件 ；b #代表块设备；c #代表的是硬件设备（键盘） 
+r:  对文件来说，是可读取内容；  对文件夹来说，是可以ls      4：表示读权限
+w:  对文件来说，是可修改文件的内容；对文件夹来说，是可以在其中创建或者删除子节点   2：表示写权限
+x： 对文件来说，是能否运行这个文件；对文件夹来说，是能否cd进入这个目录  
 第一组rwx：## 表示这个文件的拥有者对它的权限：可读可写可执行
 第二组r-x：## 表示这个文件的所属组用户对它的权限：可读，不可写，可执行
 第三组r-x：## 表示这个文件的其他用户（相对于上面两类用户）对它的权限：可读，不可写，可执行
 
++ chmod：修改文件的读写执行权限命令
++ chown：修改文件的所属组以及所属者，只有root权限能执行
+  + -R #递归的意思
+
+```shell
 chmod +x file.txt： 给文件file.txt的所有用户加上可执行权限
 chmod u-x a.sh：给自己减掉可执行权限
 chmod o+rx b.sh：给其它人加两个权限
 chmod g+rx b.sh：给所属组加两个权限
+chmod u+x,g+w,o+w boot.log 
+chmod u-x,g-w,o-w boot.log 
+chmod 777 boot.log
 
-补充：
-r:  对文件来说，是可读取内容；  对文件夹来说，是可以ls
-w:  对文件来说，是可修改文件的内容；对文件夹来说，是可以在其中创建或者删除子节点
-x： 对文件来说，是能否运行这个文件；对文件夹来说，是能否cd进入这个目录
-## <只有root权限能执行>
-chown angela  aaa ## 改变所属用户
-chown :angela  aaa ## 改变所属组
-chown angela:angela aaa/ ## 同时修改所属用户和所属组
+chown angela  aaa ## 把aaa文件改变为所属用户angela
+chown :angelaccc  aaa ## 把aaa文件改变为所属组angelaccc
+chown angela:angelaccc aaa/ ## 同时修改所属用户和所属组
 ```
 
-## 系统服务管理 
+####  用户管理
+
++ 查看用户信息：cat /etc/passwd 
+
+  /sbin/nologin #是不可登录的 
+  /bin/bash #可以登录
+
+  | 用户       | 密码占位符 | UID   | GID  | 用户描述 | 用户家目录      | 登录后使用的shell解释 |
+  | ---------- | ---------- | ----- | ---- | -------- | --------------- | --------------------- |
+  | testuser02 | :x         | :1010 | :502 |          | :/home/hahahome | :/bin/bash            |
+
++ 添加用户：useradd xiaolan 
+
+  + -u #指定用户UID
+  + -d #指定用户主目录
+  + -g #指定用户所属组
+  + -r #指定用户是系统用户
+  + -s #用户登录shell解释器
+
++ 添加用户组命令：groupadd
+
++ 删除用户组命令：groupdel
+
++ 修改用户的信息命令：usermod
+
+  + -u #指定用户UID
+  + -d #指定用户主目录
+  + -g #指定用户所属组
+
++ groups：查看当前用户组信息
+
++ 切换到xiaolan用户：su xiaolan 
+
++ id：查看用户信息
+
++ 给用户设置密码：passwd xiaolan 
+
+
+```shell
+[root@mini1 home]# passwd xiaolan 
+Changing password for user xiaolan.
+New password: 
+BAD PASSWORD: it is too simplistic/systematic
+BAD PASSWORD: is too simple
+Retype new password: 
+passwd: all authentication tokens updated successfully.
+# 删除用户，但是前提是这个用户是处于退出状态，否则出现以下信息（可以关掉session，或者在该session输入exit命令）
+[root@mini1 home]# userdel -r xiaolan 
+userdel: user xiaolan is currently used by process 3977
+
+[root@mini1 ~]# id
+uid=0(root) gid=0(root) groups=0(root) context=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023
+[root@mini1 ~]# su testuser02
+[testuser02@mini1 root]$ id
+uid=1010(testuser02) gid=502(testgroup) groups=502(testgroup) context=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023
+[testuser02@mini1 root]$ su - root
+Password: 
+[root@mini1 ~]# id testuser02
+uid=1010(testuser02) gid=502(testgroup) groups=502(testgroup)
+```
+
+####  普通用户进行管理员权限操作
+
+sudo 命令
+
+对这个进行配置：vi /etc/sudoers
+
+```shell
+## Allow root to run any commands anywhere
+root    ALL=(ALL)       ALL
+newxiaohui      ALL=(ALL)       ALL
+```
+
+这样弄：（单单su：切换成管理员）
+
+```shell
+[xiaofeng@mini1 home]$ su - newxiaohui
+Password: 
+[newxiaohui@mini1 ~]$ sudo useradd createxiaohui  // 临时切换
+
+We trust you have received the usual lecture from the local System
+Administrator. It usually boils down to these three things:
+
+    #1) Respect the privacy of others.
+    #2) Think before you type.
+    #3) With great power comes great responsibility.
+
+[sudo] password for newxiaohui: 
+[newxiaohui@mini1 ~]$
+```
+
+###  系统服务管理 
 
 ```shell
 ## xxx 为 具体服务名称：sshd、iptables（防火墙）、mysql
@@ -421,9 +677,7 @@ service xxx status/stop/start/restart
 ## 备注：centos7 防火墙服务操作未经验证
 systemctl start/stop/status firewalld
 
-
 ## 下面的暂时不懂了，尼玛
-
 service --status-all   # 查看系统所有的后台服务进程
 service --status-all | grep httpd  # 指定
 
@@ -436,7 +690,25 @@ chkconfig --list   ## 所有
 chkconfig --list | grep httpd ## 指定
 ```
 
-## 系统启动级别管理
+```shell
+查看firewall防火墙的状态
+firewall-cmd --state
+查看防火墙开放端口规则
+firewall-cmd --list-port
+开放80端口
+firewall-cmd --permanent --add-port=80/tcp （--permanent永久生效，没有此参数重启后就失效）
+加载生效开放的端口
+firewall-cmd --reload
+查询指定端口80是否开放
+firewall-cmd --query-port=80/tcp
+验证80端口是否开放：
+安装telnet命令：yum -y install xinetd telnet telnet-server （确认联网状态）
+安装netstat与ifconfig命令：yum -y install net-tools（确认联网状态）
+关闭80端口
+firewall-cmd --remove-port=80/tcp
+```
+
+###  系统启动级别管理
 
 ```shell
 系统启动级别管理：输入  vi /etc/inittab
@@ -453,7 +725,7 @@ chkconfig --list | grep httpd ## 指定
 id:5:initdefault:  # 配置默认启动级别
 ```
 
-## netstat 
+###  netstat 
 
 ```shell
 功能说明：查看网络端口的使用情况
@@ -477,7 +749,7 @@ apache     2027   2020  0 10:11 ?        00:00:00 /usr/sbin/httpd
 root       2310   2245  0 10:29 pts/0    00:00:00 grep httpd
 ```
 
-## ps
+###  ps
 
 功能说明：显示所有进程信息。 ps 与grep 常用组合用法，查找特定进程
 
@@ -491,11 +763,51 @@ ps -aux | more
 ps -ef | more
 ```
 
-## free;top;df;du
++ UID：用户ID
++ PID：进程ID
++ PPID：父进程号 
++ C：CPU的占用率 
++ STIME：进程的启动时间 
++ TTY：TTY终端 
++ TIME：进程执行起到现在总的CPU占用时间 
++ CMD：启动这个进程的命令 
 
 ```shell
-top ## 监控Linux系统状况，比如cpu、内存的使用；按住键盘q退出
+[root@mini1 aaa]# ps -ef | head -n 5
+UID         PID   PPID  C STIME TTY          TIME CMD
+root          1      0  0 Nov18 ?        00:00:01 /sbin/init
+root          2      0  0 Nov18 ?        00:00:00 [kthreadd]
+root          3      2  0 Nov18 ?        00:00:00 [migration/0]
+root          4      2  0 Nov18 ?        00:00:00 [ksoftirqd/0]
+```
 
++ USER：哪个用户启动了这个命令
++ PID：进程的ID 
++ %CPU：CPU的占用率 
++ %MEM：内存的使用率
++ VSZ：如果一个程序完全驻留在内存中一共需要使用多少内存空间 
++ RSS：进程当前占用了多少内存 
++ TTY：tty终端
++ STAT：表示当前进程的状态（S#处于休眠的状态；D#不可中断的状态 ；Z#僵尸进程 ；X#死掉的进程） 
++ START：启动这个命令的时间点
++ TIME：进程执行起到现在总的CPU占用时间 
++ COMMAND：启动这个进程的命令
+
+```shell
+[root@mini1 aaa]# ps -aux | head -n 5
+Warning: bad syntax, perhaps a bogus '-'? See /usr/share/doc/procps-3.2.8/FAQ
+USER        PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root          1  0.0  0.0  19364  1536 ?        Ss   Nov18   0:01 /sbin/init
+root          2  0.0  0.0      0     0 ?        S    Nov18   0:00 [kthreadd]
+root          3  0.0  0.0      0     0 ?        S    Nov18   0:00 [migration/0]
+root          4  0.0  0.0      0     0 ?        S    Nov18   0:00 [ksoftirqd/0]
+```
+
+###  free;top;df;du
+
+top ：监控Linux系统状况，比如cpu、内存的使用；按住键盘q退出
+
+```shell
 [root@SYSOPS00074145 gxf]# free -h  ## 查看系统内存
               total        used        free      shared  buff/cache   available
 Mem:           3.7G        1.6G        230M        184M        1.9G        1.7G
@@ -533,7 +845,7 @@ drwxr-xr-x. 2 root       root       4096 Jul 22 23:44 xixi
 4.0K    xixi
 ```
 
-## uniq;sort
+###  uniq;sort
 
 ```shell
 uniq命令：对排序好的内容进行统计
@@ -541,54 +853,7 @@ sort命令：对内容进行排序
 举 例：uniq -c 123.txt | sort -n
 ```
 
-## 用户管理
-
-```shell
-[root@mini1 home]# useradd xiaolan # 管理员为添加用户
-[root@mini1 home]# passwd xiaolan # 设置密码
-Changing password for user xiaolan.
-New password: 
-BAD PASSWORD: it is too simplistic/systematic
-BAD PASSWORD: is too simple
-Retype new password: 
-passwd: all authentication tokens updated successfully.
-[root@mini1 home]# cat /etc/passwd # 查看用户数
-[root@mini1 ~]# su - xiaolan # 切换到xiaolan用户
-[root@mini1 home]# userdel -r xiaolan # 删除用户，但是前提是这个用户是处于退出状态，否则出现以下信息（可以关掉session，或者在该session输入exit命令）
-userdel: user xiaolan is currently used by process 3977
-```
-
-## 普通用户进行管理员权限操作
-
-sudo 命令
-
-对这个进行配置：vi /etc/sudoers
-
-```shell
-## Allow root to run any commands anywhere
-root    ALL=(ALL)       ALL
-newxiaohui      ALL=(ALL)       ALL
-```
-
-这样弄：（单单su：切换成管理员）
-
-```shell
-[xiaofeng@mini1 home]$ su - newxiaohui
-Password: 
-[newxiaohui@mini1 ~]$ sudo useradd createxiaohui  // 临时切换
-
-We trust you have received the usual lecture from the local System
-Administrator. It usually boils down to these three things:
-
-    #1) Respect the privacy of others.
-    #2) Think before you type.
-    #3) With great power comes great responsibility.
-
-[sudo] password for newxiaohui: 
-[newxiaohui@mini1 ~]$
-```
-
-## 父子进程;管道
+###  父子进程;管道
 
 ```shell
 ## 父进程是：35026，子进程是：46478
@@ -713,7 +978,7 @@ bash    47739 root    6u   CHR  136,3    0t0       6 /dev/pts/3
 bash    47739 root  255u   CHR  136,3    0t0       6 /dev/pts/3
 ```
 
-## 挂载
+###  挂载
 
 ```shell
 可以挂载光盘、硬盘、磁带、光盘镜像文件等
@@ -727,7 +992,7 @@ umount /mnt/cdrom
 ** 存储空间查看：df -h
 ```
 
-## 网络管理
+###  网络管理
 
 主机名配置
 
@@ -760,7 +1025,7 @@ IPV6INIT=no  #这个可以不要
 USERCTL=no   #这个可以不要
 ```
 
-## 域名映射：vi /etc/hosts
+###  域名映射：vi /etc/hosts
 
 配置完后最好重启：reboot
 
@@ -773,7 +1038,7 @@ USERCTL=no   #这个可以不要
 [root@mini1 ~]# ping mini1
 ```
 
-## 登录
+###  ssh
 
 ```shell
 免密登录：(注意，自己也要给自己配置免密登录哦)

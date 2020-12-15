@@ -330,20 +330,39 @@ cat /etc/passwd | grep '/bin/bash' | cut -d ':' -f 1 | grep -v root
 + p #以行为单位进行打印，通常与-n一起使用
 
 1. 打印出第二行：df -h | sed -n '2p'
-
 2. 删除第二行：df -h | sed '2d' 
-
 3. a #在行的下面插入新的内容：df -h | sed '2a 1234567890' 
-
 4. i #在行的上面插入新的内容：df -h | sed '2i 1234567890'
-
 5. c #替换：df -h | sed '2c 1234567890' 
-
 6. 指定字符串替换：s/要被取代的内容/新的字符串/g #指定内容进行替换：df -h | sed 's/centos-root/Centos7/g'
-
 7. 在文件中模糊搜索tmpfs：sed -n '/tmpfs/p' df.txt （ grep  tmpfs 123.txt ）
-
 8. -e #表示可以执行多条动作：sed -e 's/18/188/g' -e 's/477/488/g' 123.txt > 444.txt（替换18为188，替换477位488），并输出所在行
+
+### crond
+
+```shell
+*  *  * *  * 级别 命令 
+分 时 日 月 周
+
+service crond status/start/stop/restart
+crontab -l #列出crontab有哪些任务 
+crontab -e #编辑crontab任务 
+crontab -r #删除crontab里的所有任务
+
+* * * * * /home/hahahome/timer/test.sh >> /home/hahahome/timer/haha.txt
+* * * * * /home/hahahome/timer/test02.sh >> /home/hahahome/timer/haha.txt
+```
+
+	+ 每分钟执行：\* * * * * 或者 */1 * * * *
+	+ 每小时执行 ：0 * * * *
+	+ 每天执行：0 0 * * * 
+	+ 每周执行：0 0 * * 0 
+	+ 每月执行 ：0 0 1 * *
+	+ 每年执行 ：0 0 1 1 *
+	+ 每天早上6点执行 ：0 6 * * *
+	+ 每两个小时执行 ：0 */2 * * *
+	+ 每小时的10分，40分执行 ：10,40 * * * *
+	+ 每天的下午4点、5点、6点的5 min、15 min、25 min、35 min、45 min、55 min时执行命令：5,15,25,35,45,55 16,17,18 * * *
 
 ###  重定向
 

@@ -1056,3 +1056,39 @@ ssh mini2;ssh 192.168.207.133  ##  登录另外一台机器，免密登录？
 exit ## 退出当前登录的机器
 ```
 
+```
+
+192.168.8.61，192.168.8.62  root/cxtest2017
+
+~richmail/bin/mysql_rm
+
+show databases;
+
+drop database monitor1;
+
+create database monitor1 character set utf8 collate utf8_bin;
+use monitor1;
+source /home/richmail/richmonitor/schema.sql;
+source /home/richmail/richmonitor/images.sql;
+source /home/richmail/richmonitor/data.sql;
+```
+
+### 数据库
+
+```shell
+
+192.168.8.61，192.168.8.62  root/cxtest2017
+
+~richmail/bin/mysql_rm
+
+show databases;
+
+drop database monitor1;
+
+create database monitor1 character set utf8 collate utf8_bin;
+use monitor1;
+source /home/richmail/richmonitor/schema.sql;
+source /home/richmail/richmonitor/images.sql;
+source /home/richmail/richmonitor/data.sql;
+```
+

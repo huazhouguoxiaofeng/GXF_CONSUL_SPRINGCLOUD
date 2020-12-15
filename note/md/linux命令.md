@@ -321,9 +321,29 @@ cat /etc/passwd | grep '/bin/bash' | cut -d ':' -f 1 | grep -v root
   一切正常 
   ```
 
-  
 
+### sed
 
++ 主要对数据进行处理（选取，新增，替换，删除，搜索）
++ sed [选项] [动作] 文件名
++ -n #把匹配到的行输出打印到屏幕
++ p #以行为单位进行打印，通常与-n一起使用
+
+1. 打印出第二行：df -h | sed -n '2p'
+
+2. 删除第二行：df -h | sed '2d' 
+
+3. a #在行的下面插入新的内容：df -h | sed '2a 1234567890' 
+
+4. i #在行的上面插入新的内容：df -h | sed '2i 1234567890'
+
+5. c #替换：df -h | sed '2c 1234567890' 
+
+6. 指定字符串替换：s/要被取代的内容/新的字符串/g #指定内容进行替换：df -h | sed 's/centos-root/Centos7/g'
+
+7. 在文件中模糊搜索tmpfs：sed -n '/tmpfs/p' df.txt （ grep  tmpfs 123.txt ）
+
+8. -e #表示可以执行多条动作：sed -e 's/18/188/g' -e 's/477/488/g' 123.txt > 444.txt（替换18为188，替换477位488），并输出所在行
 
 ###  重定向
 
@@ -345,18 +365,8 @@ posix名称 文件描述符 用途
 	llll 2> 123.txt
 ## 错误输出重定向：llll 这个命令错误，将这个错误命令信息打印追加到 123.txt 这个文件
 	llll 2>> 123.txt
-## 代表的是可以执行多条命令；例如这个例子，把这个东东合并输出
-	[root@mini1 mypractice]# cat a1.txt 
-	afsag
-	agst
-	gatg
-	[root@mini1 mypractice]# cat a2.txt 
-	2222
+## ;代表的是可以执行多条命令；例如这个例子，把这个东东合并输出
 	[root@mini1 mypractice]# cat a1.txt ;cat a2.txt 
-	afsag
-	agst
-	gatg
-	2222
 ## &&：前面的命令执行成功的话，后面的才可以执行成功；前面的命令执行失败的话，后面的不可以执行
 ## ||：前面的命令执行成功的话，后面的不可以执行；前面的命令执行失败的话，后面的可以执行
 	[root@mini1 mypractice]# lll a1.txt && cat a2.txt   
